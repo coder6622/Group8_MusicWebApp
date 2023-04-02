@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MusicApp.Core.Entities;
 using MusicApp.Data.Contexts;
 using MusicApp.Data.Seeders;
+using MusicApp.Services.Musics.Songs;
 
 namespace MusicApp.WebApi.Extensions
 {
@@ -22,6 +23,7 @@ namespace MusicApp.WebApi.Extensions
       builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
       builder.Services.AddScoped<IDataSeeder, DataSeeder>();
+      builder.Services.AddScoped<ISongRepository, SongRespository>();
 
       return builder;
     }
