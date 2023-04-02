@@ -12,7 +12,7 @@ using MusicApp.Data.Contexts;
 namespace MusicApp.Data.Migrations
 {
     [DbContext(typeof(MusicDbContext))]
-    [Migration("20230402135125_Intial")]
+    [Migration("20230402162047_Intial")]
     partial class Intial
     {
         /// <inheritdoc />
@@ -175,11 +175,10 @@ namespace MusicApp.Data.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<string>("IsPublic")
-                        .IsRequired()
+                    b.Property<bool>("IsPublic")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("False");
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()

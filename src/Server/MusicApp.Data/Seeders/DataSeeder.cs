@@ -27,6 +27,11 @@ namespace MusicApp.Data.Seeders
     {
       _dbContext.Database.EnsureCreated();
 
+      if (_dbContext.Set<Song>().Any())
+      {
+        return;
+      }
+
       var categories = AddCategories();
       var groupTags = AddGroupTags();
 
@@ -36,7 +41,9 @@ namespace MusicApp.Data.Seeders
       var roles = AddRoles();
       var users = AddUsers(roles);
 
-      var songs = AddSongs(categories, artists, tags, users);
+      var songs = AddSongs(categories, artists, tags);
+      var userSongs = AddUserSongs(users, songs);
+      var playlists = AddPlaylists(users, songs, artists);
     }
 
     private IList<Category> AddCategories()
@@ -121,8 +128,6 @@ namespace MusicApp.Data.Seeders
 
       _dbContext.AddRange(groupTagsToAdd);
       _dbContext.SaveChanges();
-
-
 
       return groupTags;
     }
@@ -255,8 +260,7 @@ namespace MusicApp.Data.Seeders
     private IList<Song> AddSongs(
       IList<Category> categories,
       IList<Artist> artists,
-      IList<Tag> tags,
-      IList<User> users)
+      IList<Tag> tags)
     {
       var songs = new List<Song>()
       {
@@ -276,7 +280,7 @@ namespace MusicApp.Data.Seeders
           Enable = true,
           Category= categories[0],
           Artists= new List<Artist>(){artists[0]},
-          Tags = new List<Tag>(){ tags[0], tags[5] }
+          Tags = new List<Tag>(){ tags[0], tags[5] },
         },
         new()
         {
@@ -377,9 +381,7 @@ namespace MusicApp.Data.Seeders
       {
         FullName = "admin",
         UserName = "admin",
-        NormalizedUserName = "ADMIN",
         Email = "2014469@dlu.edu.vn",
-        NormalizedEmail = "2014469@dlu.edu.vn".ToUpper(),
         EmailConfirmed = true,
         SecurityStamp = Guid.NewGuid().ToString("D")
       };
@@ -389,9 +391,7 @@ namespace MusicApp.Data.Seeders
       {
         FullName = "admin 1",
         UserName = "admin1",
-        NormalizedUserName = "ADMIN1",
         Email = "test@gmail.com",
-        NormalizedEmail = "test@gmail.com".ToUpper(),
         EmailConfirmed = true,
         SecurityStamp = Guid.NewGuid().ToString("D"),
       };
@@ -418,6 +418,114 @@ namespace MusicApp.Data.Seeders
 
       _dbContext.SaveChanges();
       return users;
+    }
+
+    private IList<UserSong> AddUserSongs(
+      IList<User> users,
+      IList<Song> songs)
+    {
+      var userSongs = new List<UserSong>() {
+        new()
+        {
+          User = users[0],
+          Song = songs[0],
+          CreatedDate = DateTime.Now,
+          IsLike = true,
+          PlayCount = 1,
+        },
+        new()
+        {
+          User = users[0],
+          Song = songs[1],
+          CreatedDate = DateTime.Now,
+          IsLike = false,
+          PlayCount = 10,
+        },
+        new()
+        {
+          User = users[1],
+          Song = songs[0],
+          CreatedDate = DateTime.Now,
+          IsLike = false,
+          PlayCount = 10,
+        },
+        new()
+        {
+          User = users[1],
+          Song = songs[0],
+          CreatedDate = DateTime.Now,
+          IsLike = true,
+          PlayCount = 2,
+        },
+      };
+
+      var userSongsToAdd = new List<UserSong>();
+
+      foreach (var userSong in userSongs)
+      {
+        if (!_dbContext.UserSongs.Any(us => us.UserId == userSong.UserId && us.SongId == userSong.SongId))
+        {
+          userSongsToAdd.Add(userSong);
+        }
+      }
+
+      _dbContext.AddRange(userSongsToAdd);
+      _dbContext.SaveChanges();
+
+
+
+      return userSongs;
+    }
+
+    private IList<Playlist> AddPlaylists(
+      IList<User> users,
+      IList<Song> songs,
+      IList<Artist> artists)
+    {
+      var playlists = new List<Playlist>()
+      {
+        new()
+        {
+          Name="Playlist 1",
+          UrlSlug="playlist-1",
+          IsPublic = true,
+          CreatedDate=DateTime.Now,
+          Enable = true,
+          User = users[0],
+          Artists= new []{artists[0], artists[1] },
+          Songs = new [] {songs[0], songs[1] },
+          Tags = songs[0].Tags.Concat(songs[1].Tags).ToList()
+        },
+        new()
+        {
+          Name="Playlist 2",
+          UrlSlug="playlist-2",
+          IsPublic = true,
+          CreatedDate=DateTime.Now,
+          Enable = true,
+          User = users[1],
+          Artists= new []{artists[0] },
+          Songs = new [] {songs[0], songs[2] },
+          Tags = songs[0].Tags.Concat(songs[2].Tags).ToList()
+        }
+      };
+
+      var playlistsToAdd = new List<Playlist>();
+
+      foreach (var playlist in playlists)
+      {
+        if (!_dbContext.Playlists.Any(p => p.UrlSlug == playlist.UrlSlug))
+        {
+          playlistsToAdd.Add(playlist);
+        }
+      }
+
+      _dbContext.AddRange(playlistsToAdd);
+      _dbContext.SaveChanges();
+
+
+
+      return playlists;
     }
   }
 }

@@ -185,7 +185,7 @@ namespace MusicApp.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     UrlSlug = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    IsPublic = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "False"),
+                    IsPublic = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime", nullable: true),
