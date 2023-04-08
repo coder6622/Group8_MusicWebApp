@@ -1,29 +1,21 @@
-a {
-    text-decoration: none !important;
-}
-
 .btn-body{
-    height: 80px;
-    width: 80px;
     border-radius: 20px;
-    color: #F8D9C0;
+    color:  var(--btn-menu-color);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 5px auto;
     transition: all 0.2s ease;
-    background-color: rgba(244, 187, 146,0.0);
 }
 
 .btn-body.active{
-    background-color: rgba(244, 187, 146,1);
-    color: #fff;
+    background-color: var(--btn-menu-color-bg--active);
+    color: var(--white);
     transform: scale(1.05);
 }
 
 .btn-body:hover{
-    color: #fff;
+    color: var(--white);
 }
 
 .btn-title{
@@ -31,3 +23,4 @@ a {
     font-weight: 600;
     font-size: 14px;
 }
+
