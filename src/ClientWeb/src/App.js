@@ -1,10 +1,10 @@
-function App() {
+import React from 'react'
+import Home from './screens/home';
+
+export default function App() {
   return (
-    <div className='App'>
-      <h1>Hello world</h1>
-      <button className='btn btn-primary'> Hello world</button>
+    <div>
+      <Home />
     </div>
   );
 }
-
-export default App;
