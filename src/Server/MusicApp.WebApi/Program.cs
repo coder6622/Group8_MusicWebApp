@@ -25,8 +25,6 @@ var app = builder.Build();
 
   app.UseDataSeeder();
 
-  app.MapArtistEndpoints();
-
   app.Run();
 }
 

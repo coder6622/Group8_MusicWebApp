@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using MusicApp.Core.Entities;
 using MusicApp.Data.Contexts;
 using MusicApp.Data.Seeders;
+using MusicApp.Services.Musics.Artists;
 using MusicApp.Services.Musics.Songs;
+using MusicApp.WebApi.Filters;
 
 namespace MusicApp.WebApi.Extensions
 {
@@ -24,6 +26,8 @@ namespace MusicApp.WebApi.Extensions
 
       builder.Services.AddScoped<IDataSeeder, DataSeeder>();
       builder.Services.AddScoped<ISongRepository, SongRespository>();
+
+      builder.Services.AddScoped<IArtistsRepository, ArtistsRepository>();
 
       return builder;
     }
@@ -46,7 +50,10 @@ namespace MusicApp.WebApi.Extensions
       this WebApplicationBuilder builder)
     {
       builder.Services.AddEndpointsApiExplorer();
-      builder.Services.AddSwaggerGen();
+      builder.Services.AddSwaggerGen(c =>
+      {
+        c.ParameterFilter<GuidParamaterFilter>();
+      });
 
       return builder;
     }
