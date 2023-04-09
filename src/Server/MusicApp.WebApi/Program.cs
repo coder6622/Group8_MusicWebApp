@@ -1,5 +1,4 @@
 using Carter;
-using MusicApp.WebApi.Endpoints;
 using MusicApp.WebApi.Extensions;
 using TatBlog.WebApi.Mapsters;
 using TatBlog.WebApi.Validations;
@@ -24,8 +23,6 @@ var app = builder.Build();
   app.MapCarter();
 
   app.UseDataSeeder();
-
-  app.MapArtistEndpoints();
 
   app.Run();
 }
