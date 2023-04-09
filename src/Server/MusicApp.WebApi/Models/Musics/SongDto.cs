@@ -29,7 +29,7 @@ namespace MusicApp.WebApi.Models.Musics
 
     public IList<UserSong> UserSongs { get; set; }
     public IList<Tag> Tags { get; set; }
-    public IList<Artist> Artists { get; set; }
+    //public IList<Artist> Artists { get; set; }
     public IList<Playlist> Playlists { get; set; }
 
   }
