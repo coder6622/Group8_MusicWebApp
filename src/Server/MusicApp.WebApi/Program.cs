@@ -1,5 +1,4 @@
 using Carter;
-using MusicApp.WebApi.Endpoints;
 using MusicApp.WebApi.Extensions;
 using TatBlog.WebApi.Mapsters;
 using TatBlog.WebApi.Validations;
