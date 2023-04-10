@@ -1,4 +1,6 @@
-﻿namespace MusicApp.WebApi.Models.Musics
+﻿
+
+namespace MusicApp.WebApi.Models.Musics
 {
   public class MusicFilterModel : PagingModel
   {
