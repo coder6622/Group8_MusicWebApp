@@ -48,11 +48,20 @@ namespace MusicApp.Services.Musics.Artists
     #region Lay danh sach tac gia
     public async Task<Artist> GetArtistByIdAsync(
       Guid artistId,
+      bool includeDetail = false,
       CancellationToken cancellationToken = default)
     {
-      return await _context.Set<Artist>()
-        .FindAsync(artistId, cancellationToken);
-    }
+            if (!includeDetail)
+            {
+                return await _context.Set<Artist>()
+                  .FindAsync(artistId, cancellationToken);
+            }
+
+            return await _context.Set<Artist>()
+                    .Include(s => s.Songs)
+                    .Where(s => s.Id == artistId)
+                    .FirstOrDefaultAsync(cancellationToken);
+        }
 
     public async Task<Artist> GetCachedArtistByIDAsync(
       Guid artistId,
@@ -72,6 +81,7 @@ namespace MusicApp.Services.Musics.Artists
         CancellationToken cancellationToken = default)
     {
       return await _context.Set<Artist>()
+                .Include(s => s.Songs)
           .FirstOrDefaultAsync(a => a.UrlSlug == slug, cancellationToken);
     }
 
@@ -105,7 +115,7 @@ namespace MusicApp.Services.Musics.Artists
           .ToListAsync(cancellationToken);
     }
 
-    public Task<Artist> GetArtistByIdAsync(Guid artistId)
+    public Task<Artist> GetArtistByIdAsync(Guid artistId, CancellationToken cancellationToken)
     {
       throw new NotImplementedException();
     }

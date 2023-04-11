@@ -41,12 +41,12 @@ namespace MusicApp.WebApi.Endpoints
         IArtistsRepository artistsRepository,
         IMapper mapper)
     {
-      var artist = await artistsRepository.GetArtistByIdAsync(id);
+      var artist = await artistsRepository.GetArtistByIdAsync(id, true);
 
-      return artist == null
-    ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy tác giả nào có ID = {id}"))
-    : Results.Ok(ApiResponse.Success(mapper.Map<ArtistItem>(artist)));
-    }
+       return artist == null
+                ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy tác giả có mã số {id}"))
+              : Results.Ok(ApiResponse.Success(mapper.Map<ArtistItem>(artist)));
+        }
 
     private static async Task<IResult> DeleteArtist(
       Guid id,

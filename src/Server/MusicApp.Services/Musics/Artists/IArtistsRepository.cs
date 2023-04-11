@@ -15,6 +15,7 @@ namespace MusicApp.Services.Musics.Artists
 
     Task<Artist> GetArtistByIdAsync(
       Guid artistId,
+      bool includeDetail = false,
       CancellationToken cancellationToken = default);
 
     Task<Artist> GetCachedArtistByIDAsync(
