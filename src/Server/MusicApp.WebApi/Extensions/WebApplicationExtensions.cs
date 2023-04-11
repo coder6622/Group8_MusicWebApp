@@ -6,6 +6,7 @@ using MusicApp.Data.Contexts;
 using MusicApp.Data.Seeders;
 using MusicApp.Services.Musics.Artists;
 using MusicApp.Services.Musics.Songs;
+using MusicApp.Services.Musics.Tags;
 using MusicApp.WebApi.Filters;
 
 namespace MusicApp.WebApi.Extensions
@@ -28,6 +29,8 @@ namespace MusicApp.WebApi.Extensions
       builder.Services.AddScoped<ISongRepository, SongRespository>();
 
       builder.Services.AddScoped<IArtistsRepository, ArtistsRepository>();
+
+            builder.Services.AddScoped<ITagsRepository, TagsRepository>();
 
       return builder;
     }
