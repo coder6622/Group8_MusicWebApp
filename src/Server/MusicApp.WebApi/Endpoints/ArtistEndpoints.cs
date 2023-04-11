@@ -6,6 +6,7 @@ using MusicApp.Services.Musics.Artists;
 using MusicApp.WebApi.Models;
 using MusicApp.Core.DTO;
 using Carter;
+using MusicApp.Core.Entities;
 
 namespace MusicApp.WebApi.Endpoints
 {
@@ -19,7 +20,11 @@ namespace MusicApp.WebApi.Endpoints
           .WithName("GetArtistByID")
           .Produces<ApiResponse<ArtistItem>>();
 
-      routeGroupBuilder.MapDelete("/{id:Guid}", DeleteArtist)
+            routeGroupBuilder.MapGet("/", GetAllArtist)
+          .WithName("GetAllArtist")
+          .Produces<ApiResponse<ArtistItem>>();
+
+            routeGroupBuilder.MapDelete("/{id:Guid}", DeleteArtist)
           .WithName("DeleteArtist")
           .Produces<ApiResponse<string>>();
     }
@@ -52,10 +57,12 @@ namespace MusicApp.WebApi.Endpoints
         : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không thể tìm thấy Tác giả/ ca sĩ có ID = {id}"));
     }
 
-    //private static async Task<IResult> GetAllArtist(
-    //    IArtistsRepository artistsRepository)
-    //{
-    //    return
-    //}
-  }
+        private static async Task<IResult> GetAllArtist(
+            IArtistsRepository artistsRepository,
+            IMapper mapper)
+        {
+            var artists = await artistsRepository.GetArtistAsync();
+            return Results.Ok(ApiResponse.Success(artists));
+        }
+    }
 }

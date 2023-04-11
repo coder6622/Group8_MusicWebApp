@@ -90,7 +90,6 @@ namespace MusicApp.Services.Musics.Artists
     public async Task<IList<ArtistItem>> GetArtistAsync(CancellationToken cancellationToken = default)
     {
       return await _context.Set<Artist>()
-          .OrderBy(a => a.FullName)
           .Select(a => new ArtistItem()
           {
             Id = a.Id,
