@@ -1,17 +1,21 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar/Sidebar';
-import classNames from 'classnames/bind';
-import styles from './DefaultLayout.module.scss';
+import PlayerControl from 'components/Songs/SongPlayer/Controls';
 
-const cx = classNames.bind(styles);
 function DefaultLayout({ children }) {
   return (
-    <div className={cx(['main-body'], 'row ms-0')}>
-      <div className={cx([], 'col-1 d-flex justify-content-center')}>
-        <Sidebar />
+    <>
+      <div className='h-[calc(100vh-var(--player-height))] grid grid-cols-12'>
+        <div className='col-span-1 d-flex justify-content-center'>
+          <Sidebar isFullHeight={false} />
+        </div>
+        <div className='col-span-11 bg-white h-[calc(100vh-var(--player-height))] border-b-2'>
+          {children}
+        </div>
       </div>
-      <div className={cx([], 'bg-light col-11')}>{children}</div>
-    </div>
+
+      <PlayerControl className='h-[var(--player-height)]' />
+    </>
   );
 }
 

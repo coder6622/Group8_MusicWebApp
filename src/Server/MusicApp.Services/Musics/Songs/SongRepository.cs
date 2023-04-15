@@ -4,11 +4,6 @@ using MusicApp.Core.DTO;
 using MusicApp.Core.Entities;
 using MusicApp.Data.Contexts;
 using MusicApp.Services.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicApp.Services.Musics.Songs
 {
