@@ -19,9 +19,9 @@ using MusicApp.WebApi.Filters;
 
 namespace MusicApp.WebApi.Endpoints
 {
-    public static class TagEndpoints
+    public class TagEndpoints : ICarterModule
     {
-        public static WebApplication MapTagEndpoint(this WebApplication app)
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
             var routeGroupBuilder = app.MapGroup("/api/tags");
 
@@ -32,21 +32,21 @@ namespace MusicApp.WebApi.Endpoints
             .Produces<ApiResponse<TagsItem>>();
 
 
-            
+
             routeGroupBuilder.MapPut("/{id:Guid}", UpdateTag)
             .WithName("UpdateTag")
             .AddEndpointFilter<ValidatorFilter<TagEditModel>>()
             .Produces(401)
             .Produces<ApiResponse<string>>();
 
-            
+
 
             routeGroupBuilder.MapDelete("/{id:Guid}", DeleteTag)
                 .WithName("DeleteTags")
                 .Produces(401)
                 .Produces<ApiResponse<string>>();
 
-            return app;
+
         }
         private static async Task<IResult> AddTag(
         TagEditModel model,

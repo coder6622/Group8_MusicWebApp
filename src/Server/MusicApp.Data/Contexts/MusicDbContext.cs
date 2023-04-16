@@ -30,10 +30,13 @@ namespace MusicApp.Data.Contexts
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseSqlServer(@"Server=DESKTOP-Q1BKM2G;Database=MusicPlayerApp;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=True");
-    }
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-PJ35U8S\HIEU;Database=MusicPlayerApp;Trusted_Connection=true
+            ;MultipleActiveResultSets=true;TrustServerCertificate=True");
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+            //optionsBuilder.UseSqlServer(@"Server=DESKTOP-Q1BKM2G;Database=MusicPlayerApp;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=True");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.ApplyConfigurationsFromAssembly(typeof(GroupTagMap).Assembly);
     }
