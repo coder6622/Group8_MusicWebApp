@@ -14,4 +14,12 @@ root.render(
       </GlobalStyles>
     </Provider>
   </React.StrictMode>,
+
+  // <>
+  //   <Provider store={store}>
+  //     <GlobalStyles>
+  //       <App />
+  //     </GlobalStyles>
+  //   </Provider>
+  // </>,
 );

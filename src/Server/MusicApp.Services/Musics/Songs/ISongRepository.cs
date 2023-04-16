@@ -9,12 +9,17 @@ using System.Threading.Tasks;
 
 namespace MusicApp.Services.Musics.Songs
 {
-  public interface ISongRepository
-  {
-    Task<IPagedList<T>> GetPagedSongsAsync<T>(
-      SongQuery query,
-      IPagingParams pagingParams,
-      Func<IQueryable<Song>, IQueryable<T>> mapper,
-      CancellationToken cancellationToken = default);
-  }
+    public interface ISongRepository
+    {
+        Task<IPagedList<T>> GetPagedSongsAsync<T>(
+          SongQuery query,
+          IPagingParams pagingParams,
+          Func<IQueryable<Song>, IQueryable<T>> mapper,
+          CancellationToken cancellationToken = default);
+
+        Task<Song> GetSongAsync(
+            Guid id,
+            bool includeDetail = false,
+            CancellationToken cancellationToken = default);
+    }
 }

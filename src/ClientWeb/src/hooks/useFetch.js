@@ -11,13 +11,12 @@ const useFetch = () => {
   const [controller, setController] = useState(0);
 
   async function axiosFetchAsync(params) {
-    console.log('fetch');
     try {
       setLoading(true);
       setController(new AbortController());
-      const response = await http.request(params);
+      const res = await http.request(params);
 
-      const data = response.data;
+      const data = res.data;
       if (data.isSuccess) {
         setResponse(data.result);
       } else

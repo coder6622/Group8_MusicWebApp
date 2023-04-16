@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeIconVolume, setVolume } from 'store/features/audioSlice';
 
 export default function VolumeControl(props) {
-  const { audioRef } = props;
+  const { songRef } = props;
   const dispatch = useDispatch();
 
   const isMute = useSelector((state) => state.audioPlayer.isMute);
@@ -16,14 +16,14 @@ export default function VolumeControl(props) {
       dispatch(changeIconVolume(false));
       dispatch(setVolume(Number(localStorage.getItem('volume'))));
 
-      if (audioRef) {
-        audioRef.volume = Number(localStorage.getItem('volume'));
+      if (songRef) {
+        songRef.volume = Number(localStorage.getItem('volume'));
       }
     } else {
       dispatch(changeIconVolume(true));
       dispatch(setVolume(0));
-      if (audioRef) {
-        audioRef.volume = 0;
+      if (songRef) {
+        songRef.volume = 0;
       }
     }
   };

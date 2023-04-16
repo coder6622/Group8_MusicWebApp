@@ -4,7 +4,7 @@ import { images } from '../../../assets';
 import { Link } from 'react-router-dom';
 import { formatDuration } from '../../../utils/Utils';
 import { MdMoreHoriz } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   changeIconPlay,
   setAutoPlay,
@@ -18,6 +18,8 @@ function SongItem(props) {
 
   const dispatch = useDispatch();
 
+  const songId = useSelector((state) => state.audioPlayer.songId);
+
   const handlePlay = (id, currentIndex) => {
     dispatch(setSongId(id));
     dispatch(setCurrnetIndexPlaylist(currentIndex));
@@ -27,8 +29,11 @@ function SongItem(props) {
 
   return (
     <div
-      className='flex items-center justify-between gap-5 w-full p-2 rounded cursor-pointer group hover:bg-accent hover:text-white'
+      className={`flex items-center justify-between gap-5 w-full p-2 rounded cursor-pointer group hover:bg-accent hover:text-white ${
+        songId === song.id ? 'bg-active' : ''
+      }`}
       onClick={() => {
+        console.log('current id', song.id);
         handlePlay(song.id, currentIndex);
       }}
     >
@@ -47,7 +52,6 @@ function SongItem(props) {
         <h5 className='inline-block'>{song.name}</h5>
         <span className='flex justify-start'>
           {song.artists.map((artist) => {
-            console.log(artist);
             return (
               <Link
                 className='cursor-pointer no-underline text-text hover:underline group-hover:text-hoverText'

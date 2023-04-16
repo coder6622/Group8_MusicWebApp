@@ -10,4 +10,11 @@ async function GetSongs(params) {
   });
 }
 
+export const getSongPlayer = (id) => {
+  return {
+    method: 'get',
+    url: config.endpoints.songs + `/${id}`,
+  };
+};
+
 export { GetSongs as getSongs };

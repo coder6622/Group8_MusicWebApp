@@ -37,6 +37,12 @@
   }
 }
 
+@layer utilities{
+  .pause {
+    animation-play-state: paused;
+  }
+}
+
 
 *{
   box-sizing: border-box;
@@ -57,6 +63,7 @@ input::-ms-reveal {
 // Custom scrollbar
 ::-webkit-scrollbar {
   width: 12px;
+  display: none;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(127, 127, 127);
@@ -73,6 +80,24 @@ input::-ms-reveal {
   border-radius: 9999px;
 }
 
+
+@keyframes lyric-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes lyric-down {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
 
 :export {
   whiteColor: var(--color-white);

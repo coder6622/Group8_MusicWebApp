@@ -11,6 +11,7 @@ import { images } from '../../../assets';
 
 function Sidebar(props) {
   const { isFullHeight } = props;
+  console.log(isFullHeight);
   return (
     <div
       className={`flex flex-col items-center justify-between gap-9 bg-primary ${

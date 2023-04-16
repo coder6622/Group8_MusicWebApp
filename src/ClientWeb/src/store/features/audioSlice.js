@@ -1,28 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isPlay: false,
+  isPlay: true,
   isMute: false,
   songId: localStorage.getItem('songId') || '',
   currentIndexPlaylist: 0,
   infoSongPlayer: {
-    title: '',
-    thumbnail: '',
-    artistsNames: '',
+    name: '',
+    imageUrl: '',
+    artistsName: '',
     artists: [],
   },
-  srcAudio: '',
+  songUrl: '',
   currentTime: 0,
   duration: 0,
   volume: Number(localStorage.getItem('volume')) || 0.5,
   isLoop: false,
   autoPlay: false,
   playlistSong: [],
-  isLyric: false,
+  showLyric: false,
+  lyrics: '',
 };
 
 const audioSlice = createSlice({
-  name: 'audio',
+  name: 'songPlayer',
   initialState,
   reducers: {
     changeIconPlay: (state, action) => {
@@ -32,17 +33,18 @@ const audioSlice = createSlice({
       state.isMute = action.payload;
     },
     setSongId: (state, action) => {
-      state.songId = action.payload;
       localStorage.setItem('songId', action.payload);
+      state.songId = action.payload;
     },
     setInfoSongPlayer: (state, action) => {
+      console.log(state);
       state.infoSongPlayer = {
         ...state.infoSongPlayer,
         ...action.payload,
       };
     },
     setSrcAudio: (state, action) => {
-      state.srcAudio = action.payload;
+      state.songUrl = action.payload;
     },
     setCurrentTime: (state, action) => {
       state.currentTime = action.payload;
@@ -66,7 +68,10 @@ const audioSlice = createSlice({
       state.currnetIndexPlaylist = action.payload;
     },
     setOpenLyric: (state, action) => {
-      state.isLyric = action.payload;
+      state.showLyric = action.payload;
+    },
+    setLyric: (state, action) => {
+      state.lyrics = action.payload;
     },
   },
 });
@@ -85,6 +90,7 @@ export const {
   setPlaylistSong,
   setCurrnetIndexPlaylist,
   setOpenLyric,
+  setLyric,
 } = audioSlice.actions;
 
 export const audioSliceReducer = audioSlice.reducer;

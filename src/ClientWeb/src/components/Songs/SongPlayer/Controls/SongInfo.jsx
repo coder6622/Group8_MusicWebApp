@@ -1,32 +1,46 @@
 /* eslint-disable jsx-a11y/no-distracting-elements */
+import { images } from 'assets';
 import HearOutlineIcon from 'components/icons/HearOutlineIcon';
 import MoreIcon from 'components/icons/MoreIcon';
 import { IconColor, IconSize } from 'constants/icon';
 import React from 'react';
+import Marquee from 'react-fast-marquee';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { isEmptyOrSpaces } from 'utils/Utils';
 
 export default function SongInfo() {
+  const isPlay = useSelector((state) => state.audioPlayer.isPlay);
+
+  const songInfo = useSelector((state) => state.audioPlayer.infoSongPlayer);
+
+  const imageUrl = isEmptyOrSpaces(songInfo.imageUrl)
+    ? images.song_default
+    : process.env.REACT_APP_PUBLIC_URL + songInfo.imageUrl;
   return (
     <div className='flex items-center gap-4'>
       <div
-        className='flex rounded-full w-16 h-16 object-cover border-2 border-white cursor-pointer'
+        className={`flex rounded-full w-16 h-16 object-cover border-2 border-white cursor-pointer bg-cover animate-slow-spin  ${
+          isPlay ? '' : 'pause'
+        } `}
         style={{
-          backgroundImage:
-            'url(https://photo-resize-zmp3.zadn.vn/w240_r1x1_jpeg/cover/1/b/9/a/1b9a056a527b7c7409e890a48bb7fac6.jpg)',
+          backgroundImage: `url(${imageUrl})`,
         }}
       ></div>
-      <div className='max-w-[200px] text-white list-none flex flex-col gap-1 justify-center cursor-none'>
-        <marquee
-          className='text-base overflow-hidden text-clip font-bold '
-          scrolldelay='130'
+      <div className='max-w-[180px] text-white list-none flex flex-col gap-1 justify-center cursor-default'>
+        <Marquee
+          className='text-base font-bold '
+          play={true}
+          gradient={false}
+          speed={40}
         >
-          Covid Nhanh Đi Đi
-        </marquee>
+          {songInfo.name}
+        </Marquee>
         <Link
           to={''}
           className='text-xs no-underline overflow-hidden hover:underline'
         >
-          K-ICM, APJ, Huyền Thanh Môn ...
+          {songInfo.artistsName}
         </Link>
       </div>
       <div className='flex gap-4'>

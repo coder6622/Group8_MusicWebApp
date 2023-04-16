@@ -10,9 +10,9 @@ import VolumeControl from './VolumeControl';
 import VolumeSliderControl from './VolumeSliderControl';
 import LyricControl from './LyricControl';
 
-function PlayerControl() {
+function PlayerControl({ songRef }) {
   return (
-    <div className='h-[--player-height] bg-black flex px-5 items-center gap-12'>
+    <div className='h-full flex px-5 items-center gap-12 z-20'>
       <div className='basis-auto'>
         <SongInfo />
       </div>
@@ -20,16 +20,16 @@ function PlayerControl() {
         <div className='flex gap-4'>
           <RepeatControl />
           <PreviousControl />
-          <PlayControl />
+          <PlayControl songRef={songRef} />
           <NextControl />
           <ShuffleControl />
         </div>
-        <ProgressBar />
+        <ProgressBar songRef={songRef} />
       </div>
       <div className='flex items-center basis-auto justify-end'>
         <LyricControl />
-        <VolumeControl />
-        <VolumeSliderControl />
+        <VolumeControl songRef={songRef} />
+        <VolumeSliderControl songRef={songRef} />
       </div>
     </div>
   );
