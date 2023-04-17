@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MusicApp.Core.Entities;
 using MusicApp.Data.Contexts;
 using MusicApp.Data.Seeders;
+using MusicApp.Services.Musics;
 using MusicApp.Services.Musics.Artists;
 using MusicApp.Services.Musics.Songs;
 using MusicApp.WebApi.Filters;
@@ -28,6 +29,8 @@ namespace MusicApp.WebApi.Extensions
       builder.Services.AddScoped<ISongRepository, SongRespository>();
 
       builder.Services.AddScoped<IArtistsRepository, ArtistsRepository>();
+
+    builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 
       return builder;
     }
