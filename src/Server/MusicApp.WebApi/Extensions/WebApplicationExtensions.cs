@@ -30,7 +30,7 @@ namespace MusicApp.WebApi.Extensions
             builder.Services.AddScoped<IDataSeeder, DataSeeder>();
             builder.Services.AddScoped<ISongRepository, SongRespository>();
 
-    builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+            builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 
             builder.Services.AddScoped<IArtistsRepository, ArtistsRepository>();
 
