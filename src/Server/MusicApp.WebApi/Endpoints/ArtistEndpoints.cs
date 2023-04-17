@@ -7,8 +7,11 @@ using MusicApp.WebApi.Models;
 using MusicApp.Core.DTO;
 using Carter;
 using MusicApp.Core.Entities;
+<<<<<<< HEAD
 using MusicApp.WebApi.Models.Artist;
 using MusicApp.WebApi.Filters;
+=======
+>>>>>>> 7653d28e5d22e7773a1f2d3fedad7f32cc300e54
 
 namespace MusicApp.WebApi.Endpoints
 {
@@ -21,8 +24,6 @@ namespace MusicApp.WebApi.Endpoints
             routeGroupBuilder.MapGet("/{id:Guid}", GetArtistDetails)
                 .WithName("GetArtistByID")
                 .Produces<ApiResponse<ArtistItem>>();
-
-            
 
             routeGroupBuilder.MapGet("/", GetAllArtist)
                 .WithName("GetAllArtist")
@@ -81,6 +82,7 @@ namespace MusicApp.WebApi.Endpoints
         ArtistEditModel model,
         IArtistsRepository artistsRepository,
         IMapper mapper)
+<<<<<<< HEAD
         {
             if (await artistsRepository.IsExistArtistSlugAsync(Guid.Empty, model.UrlSlug))
             {
@@ -104,6 +106,24 @@ namespace MusicApp.WebApi.Endpoints
               ? Results.Ok(ApiResponse.Success("Đã xóa Artist", HttpStatusCode.NoContent))
               : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không thể tìm thấy Tác giả/ ca sĩ có ID = {id}"));
         }
+=======
+    {
+      var artist = await artistsRepository.GetArtistByIdAsync(id, true);
+
+       return artist == null
+                ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không tìm thấy tác giả có mã số {id}"))
+              : Results.Ok(ApiResponse.Success(mapper.Map<ArtistItem>(artist)));
+        }
+
+    private static async Task<IResult> DeleteArtist(
+      Guid id,
+      IArtistsRepository artistsRepository)
+    {
+      return await artistsRepository.DeleteArtists(id)
+        ? Results.Ok(ApiResponse.Success("Đã xóa Artist", HttpStatusCode.NoContent))
+        : Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound, $"Không thể tìm thấy Tác giả/ ca sĩ có ID = {id}"));
+    }
+>>>>>>> 7653d28e5d22e7773a1f2d3fedad7f32cc300e54
 
         private static async Task<IResult> GetAllArtist(
             IArtistsRepository artistsRepository,
@@ -113,4 +133,8 @@ namespace MusicApp.WebApi.Endpoints
             return Results.Ok(ApiResponse.Success(artists));
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7653d28e5d22e7773a1f2d3fedad7f32cc300e54
