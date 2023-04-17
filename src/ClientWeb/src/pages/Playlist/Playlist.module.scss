@@ -1,0 +1,21 @@
+.playlist-body{
+    width: 94%;
+    height: 90%;
+    padding: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    justify-content: space-between;
+}
+
+.playlist-cart{
+    width: 15%;
+    height: 20%;
+    border-radius: 20px;
+    background-color: var(--white);
+    border: 1px var(--white);
+    padding: 1%;
+    margin-bottom: 3%;
+    background: rgb(2, 0, 36);
+        background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+}
