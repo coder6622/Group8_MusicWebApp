@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicApp.Services.Musics.GroupTag
+namespace MusicApp.Services.Musics.GroupTags
 {
-    internal class IGroupTagRepository
+    public interface IGroupTagsRepository
     {
     }
 }

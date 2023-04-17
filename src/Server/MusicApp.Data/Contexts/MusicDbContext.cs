@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MusicApp.Core.Entities;
 using MusicApp.Data.Mappings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicApp.Data.Contexts
 {
@@ -33,6 +28,10 @@ namespace MusicApp.Data.Contexts
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-Q1BKM2G;Database=MusicPlayerApp;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=True");
             //optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=MusicPlayerApp;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
 
+            // optionsBuilder.UseSqlServer(@"Server=DESKTOP-PJ35U8S\HIEU;Database=MusicPlayerApp;Trusted_Connection=true
+            // ;MultipleActiveResultSets=true;TrustServerCertificate=True");
+
+            //optionsBuilder.UseSqlServer(@"Server=DESKTOP-Q1BKM2G;Database=MusicPlayerApp;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

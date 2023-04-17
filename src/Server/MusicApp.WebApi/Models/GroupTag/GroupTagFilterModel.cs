@@ -2,5 +2,6 @@
 {
     public class GroupTagFilterModel
     {
+        string Name { get; set; }
     }
 }
