@@ -1,26 +1,112 @@
-@import "node_modules/bootstrap/scss/bootstrap";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root{
---background-color: #1e2a3e;
---btn-menu-color: #F8D9C0;
---menu-color-bg: #E99D72;
---btn-menu-color-bg--active:  rgba(244, 187, 146,1);
---white: #fff; 
+@layer base {
+  // Config colors
+  :root {
+      --color-white: #fff;
+      --color-red: rgb(255, 65, 84);
+      --color-gray: rgb(153 153 153);
+      --color-black: #1B1B1B;
+
+      --color-primary:#E99D72;
+      --color-accent: #F8D9C0;
+      --color-active: rgba(244, 187, 146,1);
+
+      --color-text: rgba(0,0,0,0.88);
+
+      --color-hover-text: #5b7adc;
+      --color-hover-song:  #F0F0F0;
+      --color-hover-icon:  #9a9a9a57;
+  }
+
+  // Config variables
+  :root {
+      --player-height: 88px;
+  }
+
+  html {
+      @apply text-black; // Apply custom text color
+      @apply font-roboto; // Apply font family
+  }
+
+
+  .btn-controls {
+    @apply p-2 flex justify-center items-center rounded-full transition-all duration-200 hover:bg-[color:var(--color-hover-icon)]
+  }
 }
 
+@layer utilities{
+  .pause {
+    animation-play-state: paused;
+  }
+}
+
+
+*{
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: 'smooth';
+}
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow: overlay; // Padding scrollbar
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input::-ms-reveal {
+  display: none; // Hide MS password reveal button
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 12px;
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(127, 127, 127);
+  background-clip: padding-box;
+  &:hover {
+      background: #7f7f7f99;
+      background-clip: padding-box;
+  }
+  &:active {
+      background: #7f7f7fcc;
+      background-clip: padding-box;
+  }
+  border: 2px solid transparent;
+  border-radius: 9999px;
+}
+
+
+@keyframes lyric-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes lyric-down {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+:export {
+  whiteColor: var(--color-white);
+
+  primaryColor: var(--color-primary);
+  accentColor: var(--color-accent);
+  activeColor: var(--color-active);
+
+  playerHeight: var(--player-height)
 }
 
 .red{

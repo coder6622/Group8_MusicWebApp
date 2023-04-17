@@ -9,19 +9,21 @@ import { MdSpaceDashboard } from 'react-icons/md';
 import config from '../../../config';
 import { images } from '../../../assets';
 
-import styles from './Sidebar.module.scss';
-import classNames from 'classnames/bind';
-
-const cx = classNames.bind(styles);
-function Sidebar() {
+function Sidebar(props) {
+  const { isFullHeight } = props;
+  console.log(isFullHeight);
   return (
-    <div className={cx('sidebar-container')}>
+    <div
+      className={`flex flex-col items-center justify-between gap-9 bg-primary ${
+        isFullHeight ? 'h-screen' : `h-[calc(100vh-var(--player-height))]`
+      }`}
+    >
       <img
         src={images.user_default}
-        className={cx(['profile-img'])}
+        className='rounded-full w-16 h-16 mt-5'
         alt='profile'
       />
-      <div>
+      <div className=''>
         <SidebarButton
           title='Feed'
           to={config.routes.feed}

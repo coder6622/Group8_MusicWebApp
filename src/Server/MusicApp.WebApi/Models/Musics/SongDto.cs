@@ -1,4 +1,6 @@
-﻿using MusicApp.Core.Entities;
+﻿using MusicApp.Core.DTO;
+using MusicApp.Core.Entities;
+using MusicApp.WebApi.Models.Artist;
 
 namespace MusicApp.WebApi.Models.Musics
 {
@@ -27,9 +29,11 @@ namespace MusicApp.WebApi.Models.Musics
 
     public Category Category { get; set; }
 
+    public IList<ArtistDto> Artists { get; set; }
+
+
     public IList<UserSong> UserSongs { get; set; }
     public IList<Tag> Tags { get; set; }
-    //public IList<Artist> Artists { get; set; }
     public IList<Playlist> Playlists { get; set; }
 
   }
