@@ -29,8 +29,12 @@ namespace MusicApp.Data.Mappings
 
       builder.Property(x => x.ConcurrencyStamp).IsConcurrencyToken();
 
-      builder.HasIndex(x => x.NormalizedUserName).HasDatabaseName("IX_Accounts_NormalizedUserName").IsUnique();
-      builder.HasIndex(x => x.NormalizedEmail).HasDatabaseName("IX_Accounts_NormalizedUserEmail").IsUnique();
+      builder.HasIndex(x => x.NormalizedUserName)
+        .HasDatabaseName("IX_Accounts_NormalizedUserName")
+        .IsUnique();
+      builder.HasIndex(x => x.NormalizedEmail)
+        .HasDatabaseName("IX_Accounts_NormalizedUserEmail")
+        .IsUnique();
 
       builder.HasMany<UserRole>()
         .WithOne(x => x.Account)
@@ -39,6 +43,21 @@ namespace MusicApp.Data.Mappings
 
       builder.HasMany<UserSong>()
         .WithOne(x => x.User)
+        .HasForeignKey(x => x.UserId)
+        .IsRequired();
+
+      builder.HasMany<UserClaim>()
+        .WithOne()
+        .HasForeignKey(x => x.UserId)
+        .IsRequired();
+
+      builder.HasMany<UserLogin>()
+        .WithOne()
+        .HasForeignKey(x => x.UserId)
+        .IsRequired();
+
+      builder.HasMany<UserToken>()
+        .WithOne()
         .HasForeignKey(x => x.UserId)
         .IsRequired();
     }

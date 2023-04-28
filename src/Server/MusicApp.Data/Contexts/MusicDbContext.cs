@@ -17,6 +17,9 @@ namespace MusicApp.Data.Contexts
     public DbSet<User> Users { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }
     public DbSet<UserSong> UserSongs { get; set; }
+    public DbSet<UserClaim> UserClaims { get; set; }
+    public DbSet<UserToken> UserTokens { get; set; }
+    public DbSet<UserLogin> UserLogins { get; set; }
 
 
     public MusicDbContext(DbContextOptions<MusicDbContext> options) : base(options)
@@ -25,7 +28,7 @@ namespace MusicApp.Data.Contexts
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      //optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=MusicWeb;Integrated Security=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+      optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=MusicWeb;Integrated Security=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
