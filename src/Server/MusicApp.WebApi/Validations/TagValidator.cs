@@ -9,7 +9,7 @@ namespace MusicApp.WebApi.Validations
         {
             RuleFor(a => a.Name)
                 .NotEmpty()
-                .WithMessage("Tên Tag sĩ không được để trống!!!!!")
+                .WithMessage("Tên Tag không được để trống!!!!!")
                 .MaximumLength(100)
                 .WithMessage("Tên Tag tối đa 100 ký tự :3");
 
